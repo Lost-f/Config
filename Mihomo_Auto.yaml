@@ -320,10 +320,10 @@ rules:
   - "RULE-SET,YouTube, YouTube"       # YouTube相关流量走YouTube策略组
   - "RULE-SET,Netflix, Netflix"       # Netflix相关流量走Netflix策略组
   - "RULE-SET,TikTok, TikTok"         # TikTok相关流量走TikTok策略组
-  - "RULE-SET,Apple, Apple"        # Apple相关流量走AppStore策略组
-  - "RULE-SET,GitHub, Select"          # GitHub规则流量走Select策略组
-  - "RULE-SET,SteamCN, Direct"       # Steam中国区相关流量走Direct策略组
+  - "RULE-SET,Apple, Apple"           # Apple相关流量走AppStore策略组
+  - "RULE-SET,GitHub, Select"         # GitHub规则流量走Select策略组
+  - "RULE-SET,SteamCN, Direct"        # Steam中国区相关流量走Direct策略组
   - "RULE-SET,ChinaIp, Direct"        # 中国IP流量直连
   - "RULE-SET,Lan, Direct"            # 局域网流量直连
-  - "GEOIP,CN, Direct"               # GeoIP定位中国IP走Direct策略组
-  - "MATCH, Final"                   # 其余流量默认走Final策略组，避免漏包
+  - "GEOIP,CN, Direct"                # GeoIP定位中国IP走Direct策略组
+  - "MATCH, Final"                    # 其余流量默认走Final策略组，避免漏包
