@@ -195,8 +195,8 @@ proxy-groups:
       - Select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
 
-  # 全球直连，优先直连，遇特殊情况走代理
-  - name: 全球直连
+  # Direct，优先直连，遇特殊情况走代理
+  - name: Direct
     type: select
     proxies:
       - Direct
@@ -264,7 +264,7 @@ rule-providers:
     type: http
 
   YouTube:
-    url: https://raw.githubusercontent.com/myzxdcd/CS/refs/heads/main/Clash/YouTube.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list
     path: ./ruleset/YouTube.list
     behavior: classical
     interval: 86400
@@ -287,15 +287,15 @@ rule-providers:
     format: text
     type: http
 
-  HT:
-    url: https://raw.githubusercontent.com/myzxdcd/CS/refs/heads/main/Clash/HT
-    path: ./Ruleset/HT
+  GitHub:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list
+    path: ./Ruleset/GitHub.list
     behavior: classical
     interval: 86400
     format: text
     type: http 
 
-  ChinaIp:
+  ChinaIPs:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/ChinaIPs/ChinaIPs.list
     path: ./Ruleset/ChinaIPs.list
     behavior: classical
@@ -321,9 +321,9 @@ rules:
   - "RULE-SET,Netflix, Netflix"       # Netflix相关流量走Netflix策略组
   - "RULE-SET,TikTok, TikTok"         # TikTok相关流量走TikTok策略组
   - "RULE-SET,Apple, AppStore"        # Apple相关流量走AppStore策略组
-  - "RULE-SET,HT,特殊使用"             # HT规则流量走特殊使用组
-  - "RULE-SET,SteamCN, 全球直连"       # Steam中国区相关流量走全球直连组
-  - "RULE-SET,ChinaIp,全球直连"        # 中国IP流量直连
-  - "RULE-SET,Lan,全球直连"            # 局域网流量直连
-  - "GEOIP,CN, 全球直连"               # GeoIP定位中国IP走全球直连组
-  - "MATCH, Final"                    # 其余流量默认走Final策略组，避免漏包
+  - "RULE-SET,GitHub,Select"          # GitHub规则流量走Select策略组
+  - "RULE-SET,SteamCN, Direct"       # Steam中国区相关流量走Direct策略组
+  - "RULE-SET,ChinaIp,Direct"        # 中国IP流量直连
+  - "RULE-SET,Lan,Direct"            # 局域网流量直连
+  - "GEOIP,CN, Direct"               # GeoIP定位中国IP走Direct策略组
+  - "MATCH, Final"                   # 其余流量默认走Final策略组，避免漏包
