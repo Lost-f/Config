@@ -315,16 +315,16 @@ rule-providers:
 
 # 规则集，调用上面的rule-providers或自定义规则，指向对应策略组，实现按应用分流
 rules:
-  - "RULE-SET,Google, Google"         # 访问Google相关流量走Google策略组
-  - "RULE-SET,Telegram, Telegram"     # Telegram相关流量走Telegram策略组
-  - "RULE-SET,OpenAI, OpenAI"         # OpenAI相关流量走OpenAI策略组
-  - "RULE-SET,YouTube, YouTube"       # YouTube相关流量走YouTube策略组
-  - "RULE-SET,Netflix, Netflix"       # Netflix相关流量走Netflix策略组
-  - "RULE-SET,TikTok, TikTok"         # TikTok相关流量走TikTok策略组
-  - "RULE-SET,Apple, Apple"           # Apple相关流量走AppStore策略组
-  - "RULE-SET,GitHub, SEL"            # GitHub规则流量走Select策略组
-  - "RULE-SET,SteamCN, DIR"        # Steam中国区相关流量走DIR策略组
-  - "RULE-SET,ChinaIp, DIR"        # 中国IP流量直连
-  - "RULE-SET,Lan, DIR"            # 局域网流量直连
-  - "GEOIP,CN, DIR"                # GeoIP定位中国IP走DIR策略组
-  - "MATCH, FINAL"                    # 其余流量默认走FINAL策略组，避免漏包
+  - "RULE-SET,Google,Google"         # 访问Google相关流量走Google策略组
+  - "RULE-SET,Telegram,Telegram"     # Telegram相关流量走Telegram策略组
+  - "RULE-SET,OpenAI,OpenAI"         # OpenAI相关流量走OpenAI策略组
+  - "RULE-SET,YouTube,YouTube"       # YouTube相关流量走YouTube策略组
+  - "RULE-SET,Netflix,Netflix"       # Netflix相关流量走Netflix策略组
+  - "RULE-SET,TikTok,TikTok"         # TikTok相关流量走TikTok策略组
+  - "RULE-SET,Apple,Apple"           # Apple相关流量走AppStore策略组
+  - "RULE-SET,GitHub,SEL"            # GitHub规则流量走Select策略组
+  - "RULE-SET,SteamCN,DIR"        # Steam中国区相关流量走DIR策略组
+  - "RULE-SET,ChinaIp,DIR"        # 中国IP流量直连
+  - "RULE-SET,Lan,DIR"            # 局域网流量直连
+  - "GEOIP,CN,DIR"                # GeoIP定位中国IP走DIR策略组
+  - "MATCH,FINAL"                    # 其余流量默认走FINAL策略组，避免漏包
