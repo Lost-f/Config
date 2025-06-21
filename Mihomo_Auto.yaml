@@ -14,7 +14,7 @@ Proxy-groups:
       - US                       # 美国节点集合（url-test策略组）
       - KR                       # 韩国节点集合（url-test策略组）
       - SEL                      # 另一个手动选择策略组
-      - DIRECT                   # 直连，不走代理
+      - DIR                      # 直连，不走代理
     icon: https://github.com/clash-verge-rev/clash-verge-rev/raw/main/src-tauri/icons/icon.png
 
   - name: SEL                    # Select策略组，包含所有节点及策略，方便手动精细调节
@@ -101,7 +101,7 @@ Proxy-groups:
       - US
       - KR
       - SEL
-      - DIRECT
+      - DIR
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
 
   - name: OpenAI
@@ -116,7 +116,7 @@ Proxy-groups:
       - US
       - KR
       - SEL
-      - DIRECT
+      - DIR
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
 
   - name: YouTube
@@ -131,7 +131,7 @@ Proxy-groups:
       - US
       - KR
       - SEL
-      - DIRECT
+      - DIR
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 
   - name: TikTok
@@ -146,7 +146,7 @@ Proxy-groups:
       - US
       - KR
       - SEL
-      - DIRECT
+      - DIR
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png
 
   - name: Netflix
@@ -162,7 +162,7 @@ Proxy-groups:
       - US
       - KR
       - SEL
-      - DIRECT
+      - DIR
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
 
   # Google相关服务策略组
@@ -177,14 +177,14 @@ Proxy-groups:
       - JP
       - KR
       - SEL
-      - DIRECT
+      - DIR
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
 
   # Apple相关服务策略组
   - name: Apple
     type: select
     proxies:
-      - DIRECT
+      - DIR
       - PROXY
       - US
       - HK
@@ -195,22 +195,22 @@ Proxy-groups:
       - SEL
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
 
-  # DIRECT，优先直连，遇特殊情况走代理
-  - name: DIRECT
+  # DIR，优先直连，遇特殊情况走代理
+  - name: DIR
     type: select
     proxies:
-      - DIRECT
+      - DIR
       - PROXY
       - AUTO
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
 
-  # Final，未被规则捕获的流量走这里，保证不丢包
-  - name: Final
+  # FINAL，未被规则捕获的流量走这里，保证不丢包
+  - name: FINAL
     type: select
     proxies:
       - PROXY
       - AUTO
-      - DIRECT
+      - DIR
       - HK
       - TW
       - SG
@@ -322,8 +322,8 @@ rules:
   - "RULE-SET,TikTok, TikTok"         # TikTok相关流量走TikTok策略组
   - "RULE-SET,Apple, Apple"           # Apple相关流量走AppStore策略组
   - "RULE-SET,GitHub, SEL"            # GitHub规则流量走Select策略组
-  - "RULE-SET,SteamCN, DIRECT"        # Steam中国区相关流量走DIRECT策略组
-  - "RULE-SET,ChinaIp, DIRECT"        # 中国IP流量直连
-  - "RULE-SET,Lan, DIRECT"            # 局域网流量直连
-  - "GEOIP,CN, DIRECT"                # GeoIP定位中国IP走DIRECT策略组
-  - "MATCH, Final"                    # 其余流量默认走Final策略组，避免漏包
+  - "RULE-SET,SteamCN, DIR"        # Steam中国区相关流量走DIR策略组
+  - "RULE-SET,ChinaIp, DIR"        # 中国IP流量直连
+  - "RULE-SET,Lan, DIR"            # 局域网流量直连
+  - "GEOIP,CN, DIR"                # GeoIP定位中国IP走DIR策略组
+  - "MATCH, FINAL"                    # 其余流量默认走FINAL策略组，避免漏包
