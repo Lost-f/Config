@@ -1,70 +1,70 @@
-# 代理策略组配置（Proxy-groups）
+# 代理策略组配置（proxy-groups）
 # 通过策略组，可以将不同用途的流量分配到对应的代理节点组。
 # 例如，Instagram 类应用可以指定美国、新加坡节点等。
 # icon 支持图片链接或 emoji，非必须，可根据喜好调整。
-Proxy-groups:
-  - name: PROXY                  # 主策略组，用户手动选择节点时首选
+proxy-groups:
+  - name: 节点选择                # 主策略组，用户手动选择节点时首选
     type: select                 # 选择类型，用户可手动选择其中一个节点或策略组
     proxies:
-      - AUTO                     # 调用AUTO策略组（智能测速选最快）
-      - HK                       # 香港节点集合（url-test策略组）
-      - TW                       # 台湾节点集合（url-test策略组）
-      - SG                       # 新加坡节点集合（url-test策略组）
-      - JP                       # 日本节点集合（url-test策略组）
-      - US                       # 美国节点集合（url-test策略组）
-      - KR                       # 韩国节点集合（url-test策略组）
-      - SEL                      # 另一个手动选择策略组
-      - DIR                      # 直连，不走代理
+      - 自动选择                 # 调用自动选择策略组（智能测速选最快）
+      - 香港智选                 # 香港节点集合（url-test策略组）
+      - 台湾智选                 # 台湾节点集合（url-test策略组）
+      - 新加坡智选               # 新加坡节点集合（url-test策略组）
+      - 日本智选                 # 日本节点集合（url-test策略组）
+      - 美国智选                 # 美国节点集合（url-test策略组）
+      - 韩国智选                 # 韩国节点集合（url-test策略组）
+      - 手动切换                 # 另一个手动选择策略组
+      - DIRECT                   # 直连，不走代理
     icon: https://github.com/clash-verge-rev/clash-verge-rev/raw/main/src-tauri/icons/icon.png
 
-  - name: SEL                    # Select策略组，包含所有节点及策略，方便手动精细调节
+  - name: 手动切换               # 手动切换策略组，包含所有节点及策略，方便手动精细调节
     include-all: true            # 包含所有代理节点
     type: select                 # 手动选择节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_Update.png
 
-  - name: AUTO                  # 智能测速AUTO最快节点，节省用户手动选择时间
+  - name: 自动选择               # 智能测速自动选择最快节点，节省用户手动选择时间
     type: url-test              # 通过访问指定URL测速延迟来判断节点快慢
     include-all: true           # 测试所有代理节点
     interval: 86400             # 测速间隔，单位秒，86400秒=24小时
     tolerance: 50               # 延迟容忍度，单位毫秒，50ms以内视为可接受
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AUTO.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
 
-  # DIR，优先直连，遇特殊情况走代理
-  - name: DIR
+  # 全球直连，优先直连，遇特殊情况走代理
+  - name: 全球直连
     type: select
     proxies:
-      - DIR
-      - PROXY
-      - AUTO
+      - DIRECT
+      - 节点选择
+      - 自动选择
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
 
-  # FINAL，未被规则捕获的流量走这里，保证不丢包
-  - name: FINAL
+  # 漏网之鱼，未被规则捕获的流量走这里，保证不丢包
+  - name: 漏网之鱼
     type: select
     proxies:
-      - PROXY
-      - AUTO
-      - DIR
-      - HK
-      - TW
-      - SG
-      - JP
-      - US
-      - KR
-      - SEL
+      - 节点选择
+      - 自动选择
+      - DIRECT
+      - 香港智选
+      - 台湾智选
+      - 新加坡智选
+      - 日本智选
+      - 美国智选
+      - 韩国智选
+      - 手动切换
     icon: https://img.icons8.com/?size=144&id=9Mz1BhM4ui54&format=png&color=000000
     
 
   # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
-  - name: HK
+  - name: 香港智选
     include-all: true
     filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong  # 节点名匹配规则（正则表达式，不区分大小写）
-    type: url-test                                    # 通过访问特定URL测速延迟
+    type: url-test                                     # 通过访问特定URL测速延迟
     interval: 300                                     # 每5分钟测速一次
     tolerance: 50                                     # 延迟容忍度50ms
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
 
-  - name: TW
+  - name: 台湾智选
     include-all: true
     filter: (?i)台|新北|彰化|TW|Taiwan
     type: url-test
@@ -72,7 +72,7 @@ Proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
 
-  - name: JP
+  - name: 日本智选
     include-all: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
     type: url-test
@@ -80,7 +80,7 @@ Proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
 
-  - name: US
+  - name: 美国智选
     include-all: true
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
     type: url-test
@@ -88,7 +88,7 @@ Proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 
-  - name: SG
+  - name: 新加坡智选
     include-all: true
     filter: (?i)新加坡|坡|狮城|SG|Singapore
     type: url-test
@@ -96,128 +96,104 @@ Proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
 
-  - name: KR
+  - name: 韩国智选
     include-all: true
     filter: (?i)KR|Korea|KOR|首尔|韩|韓
     type: url-test
     interval: 300
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
-
-  - name:  NF
-    include-all: true
-    filter: (?i)NF|奈飞|解锁|Netflix|NETFLIX|Media|流媒体
-    type: url-test
-    interval: 300
-    tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
-
+  
   
   # 以下是针对特定应用或用途的策略组，方便规则调用及分流
   - name: Telegram
     type: select
     proxies:
-      - PROXY
-      - AUTO
-      - SG
-      - HK
-      - TW
-      - JP
-      - US
-      - KR
-      - SEL
-      - DIR
+      - 节点选择
+      - 自动选择
+      - 新加坡智选
+      - 香港智选
+      - 台湾智选
+      - 日本智选
+      - 美国智选
+      - 韩国智选
+      - 手动切换
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
 
   - name: OpenAI
     type: select
     proxies:
-      - PROXY
-      - AUTO
-      - SG
-      - HK
-      - TW
-      - JP
-      - US
-      - KR
-      - SEL
-      - DIR
+      - 节点选择
+      - 自动选择
+      - 新加坡智选
+      - 香港智选
+      - 台湾智选
+      - 日本智选
+      - 美国智选
+      - 韩国智选
+      - 手动切换
+      - DIRECT
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
 
   - name: YouTube
     type: select
     proxies:
-      - PROXY
-      - AUTO
-      - SG
-      - HK
-      - TW
-      - JP
-      - US
-      - KR
-      - SEL
-      - DIR
+      - 节点选择
+      - 自动选择
+      - 新加坡智选
+      - 香港智选
+      - 台湾智选
+      - 日本智选
+      - 美国智选
+      - 韩国智选
+      - 手动切换
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 
   - name: TikTok
     type: select
     proxies:
-      - PROXY
-      - AUTO
-      - SG
-      - HK
-      - TW
-      - JP
-      - US
-      - KR
-      - SEL
-      - DIR
+      - 节点选择
+      - 自动选择
+      - 新加坡智选
+      - 香港智选
+      - 台湾智选
+      - 日本智选
+      - 美国智选
+      - 韩国智选
+      - 手动切换
+      - DIRECT
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png
-
-  - name: Netflix
-    type: select
-    proxies:
-      - PROXY
-      - AUTO
-      - NF                 # 专门筛选出适合解锁奈飞的节点
-      - SG
-      - HK
-      - TW
-      - JP
-      - US
-      - KR
-      - SEL
-      - DIR
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
 
   # Google相关服务策略组
   - name: Google
     type: select
     proxies:
-      - PROXY
-      - US
-      - HK
-      - TW
-      - SG
-      - JP
-      - KR
-      - SEL
-      - DIR
+      - 节点选择
+      - 美国智选
+      - 香港智选
+      - 台湾智选
+      - 新加坡智选
+      - 日本智选
+      - 韩国智选
+      - 手动切换
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
 
   # Apple相关服务策略组
   - name: Apple
     type: select
     proxies:
-      - DIR
-      - PROXY
-      - US
-      - HK
-      - TW
-      - SG
-      - JP
-      - KR
-      - SEL
+      - DIRECT
+      - 节点选择
+      - 美国智选
+      - 香港智选
+      - 台湾智选
+      - 新加坡智选
+      - 日本智选
+      - 韩国智选
+      - 手动切换
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
 
 
@@ -315,16 +291,15 @@ rule-providers:
 
 # 规则集，调用上面的rule-providers或自定义规则，指向对应策略组，实现按应用分流
 rules:
-  - "RULE-SET,Google,Google"         # 访问Google相关流量走Google策略组
-  - "RULE-SET,Telegram,Telegram"     # Telegram相关流量走Telegram策略组
-  - "RULE-SET,OpenAI,OpenAI"         # OpenAI相关流量走OpenAI策略组
-  - "RULE-SET,YouTube,YouTube"       # YouTube相关流量走YouTube策略组
-  - "RULE-SET,Netflix,Netflix"       # Netflix相关流量走Netflix策略组
-  - "RULE-SET,TikTok,TikTok"         # TikTok相关流量走TikTok策略组
-  - "RULE-SET,Apple,Apple"           # Apple相关流量走AppStore策略组
-  - "RULE-SET,GitHub,SEL"            # GitHub规则流量走Select策略组
-  - "RULE-SET,SteamCN,DIR"        # Steam中国区相关流量走DIR策略组
-  - "RULE-SET,ChinaIp,DIR"        # 中国IP流量直连
-  - "RULE-SET,Lan,DIR"            # 局域网流量直连
-  - "GEOIP,CN,DIR"                # GeoIP定位中国IP走DIR策略组
-  - "MATCH,FINAL"                    # 其余流量默认走FINAL策略组，避免漏包
+  - "RULE-SET,Google, Google"             # 访问Google相关流量走Google策略组
+  - "RULE-SET,Telegram, Telegram"         # Telegram相关流量走Telegram策略组
+  - "RULE-SET,OpenAI, OpenAI"             # OpenAI相关流量走OpenAI策略组
+  - "RULE-SET,YouTube, YouTube"           # YouTube相关流量走YouTube策略组
+  - "RULE-SET,TikTok, TikTok"             # TikTok相关流量走TikTok策略组
+  - "RULE-SET,Apple, Apple"               # Apple相关流量走AppStore策略组
+  - "RULE-SET,GitHub, 手动切换"            # GitHub规则流量走手动切换策略组
+  - "RULE-SET,SteamCN, 全球直连"           # Steam中国区相关流量走直连策略组
+  - "RULE-SET,ChinaIPs, 全球直连"          # 中国IP流量直连
+  - "RULE-SET,Lan, 全球直连"               # 局域网流量直连
+  - "GEOIP,CN, 全球直连"                   # GeoIP定位中国IP走DIR策略组
+  - "MATCH, 漏网之鱼"                      # 其余流量默认走漏网之鱼策略组，避免漏包
