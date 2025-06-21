@@ -29,6 +29,31 @@ Proxy-groups:
     tolerance: 50               # 延迟容忍度，单位毫秒，50ms以内视为可接受
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AUTO.png
 
+  # DIR，优先直连，遇特殊情况走代理
+  - name: DIR
+    type: select
+    proxies:
+      - DIR
+      - PROXY
+      - AUTO
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+
+  # FINAL，未被规则捕获的流量走这里，保证不丢包
+  - name: FINAL
+    type: select
+    proxies:
+      - PROXY
+      - AUTO
+      - DIR
+      - HK
+      - TW
+      - SG
+      - JP
+      - US
+      - KR
+      - SEL
+    icon: https://img.icons8.com/?size=144&id=9Mz1BhM4ui54&format=png&color=000000
+    
 
   # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
   - name: HK
@@ -195,30 +220,6 @@ Proxy-groups:
       - SEL
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
 
-  # DIR，优先直连，遇特殊情况走代理
-  - name: DIR
-    type: select
-    proxies:
-      - DIR
-      - PROXY
-      - AUTO
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-
-  # FINAL，未被规则捕获的流量走这里，保证不丢包
-  - name: FINAL
-    type: select
-    proxies:
-      - PROXY
-      - AUTO
-      - DIR
-      - HK
-      - TW
-      - SG
-      - JP
-      - US
-      - KR
-      - SEL
-    icon: https://img.icons8.com/?size=144&id=9Mz1BhM4ui54&format=png&color=000000
 
 
 # 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
