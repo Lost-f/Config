@@ -6,13 +6,13 @@ proxy-groups:
   - name: 节点选择                # 主策略组，用户手动选择节点时首选
     type: select                 # 选择类型，用户可手动选择其中一个节点或策略组
     proxies:
-      - 自动选择                  # 调用自动选择策略组（智能测速选最快）
-      - 香港智选                  # 香港节点集合（url-test策略组）
-      - 台湾智选                  # 台湾节点集合（url-test策略组）
-      - 新加坡智选                # 新加坡节点集合（url-test策略组）
-      - 日本智选                  # 日本节点集合（url-test策略组）
-      - 美国智选                  # 美国节点集合（url-test策略组）
-      - 韩国智选                  # 韩国节点集合（url-test策略组）
+      - Auto                     # 调用Auto策略组（智能测速选最快）
+      - HK                       # 香港节点集合（url-test策略组）
+      - TW                       # 台湾节点集合（url-test策略组）
+      - SG                       # 新加坡节点集合（url-test策略组）
+      - JP                       # 日本节点集合（url-test策略组）
+      - US                       # 美国节点集合（url-test策略组）
+      - KR                       # 韩国节点集合（url-test策略组）
       - 手动切换                  # 另一个手动选择策略组
       - DIRECT                   # 直连，不走代理
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple_News.png
@@ -22,41 +22,41 @@ proxy-groups:
     type: select                 # 手动选择节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Airport.png
 
-  - name: 自动选择               # 智能测速自动选择最快节点，节省用户手动选择时间
+  - name: Auto                  # 智能测速Auto最快节点，节省用户手动选择时间
     type: url-test              # 通过访问指定URL测速延迟来判断节点快慢
     include-all: true           # 测试所有代理节点
-    interval: 86400             # 测速间隔，单位秒，86400秒=24小时
+    interval: 600               # 测速间隔，单位秒，86400秒=24小时
     tolerance: 50               # 延迟容忍度，单位毫秒，50ms以内视为可接受
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Auto.png
 
-  # 全球直连，优先直连，遇特殊情况走代理
-  - name: 全球直连
+  # Global，优先直连，遇特殊情况走代理
+  - name: Global
     type: select
     proxies:
       - DIRECT
       - 节点选择
-      - 自动选择
+      - Auto
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Global.png
 
-  # 漏网之鱼，未被规则捕获的流量走这里，保证不丢包
-  - name: 漏网之鱼
+  # Final，未被规则捕获的流量走这里，保证不丢包
+  - name: Final
     type: select
     proxies:
       - 节点选择
-      - 自动选择
+      - Auto
       - DIRECT
-      - 香港智选
-      - 台湾智选
-      - 新加坡智选
-      - 日本智选
-      - 美国智选
-      - 韩国智选
+      - HK
+      - TW
+      - SG
+      - JP
+      - US
+      - KR
       - 手动切换
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
     
 
   # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
-  - name: 香港智选
+  - name: HK
     include-all: true
     filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong   # 节点名匹配规则（正则表达式，不区分大小写）
     type: url-test                                     # 通过访问特定URL测速延迟
@@ -64,7 +64,7 @@ proxy-groups:
     tolerance: 50                                      # 延迟容忍度50ms
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Hong_Kong.png
 
-  - name: 台湾智选
+  - name: TW
     include-all: true
     filter: (?i)台|新北|彰化|TW|Taiwan
     type: url-test
@@ -72,7 +72,7 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TW.png
 
-  - name: 日本智选
+  - name: JP
     include-all: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
     type: url-test
@@ -80,7 +80,7 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Japan.png
 
-  - name: 美国智选
+  - name: US
     include-all: true
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
     type: url-test
@@ -88,7 +88,7 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/United_States.png
 
-  - name: 新加坡智选
+  - name: SG
     include-all: true
     filter: (?i)新加坡|坡|狮城|SG|Singapore
     type: url-test
@@ -96,7 +96,7 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Singapore.png
 
-  - name: 韩国智选
+  - name: KR
     include-all: true
     filter: (?i)KR|Korea|KOR|首尔|韩|韓
     type: url-test
@@ -110,13 +110,13 @@ proxy-groups:
     type: select
     proxies:
       - 节点选择
-      - 自动选择
-      - 新加坡智选
-      - 香港智选
-      - 台湾智选
-      - 日本智选
-      - 美国智选
-      - 韩国智选
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
       - 手动切换
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Telegram.png
@@ -125,13 +125,13 @@ proxy-groups:
     type: select
     proxies:
       - 节点选择
-      - 自动选择
-      - 新加坡智选
-      - 香港智选
-      - 台湾智选
-      - 日本智选
-      - 美国智选
-      - 韩国智选
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
       - 手动切换
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Siri.png
@@ -140,13 +140,13 @@ proxy-groups:
     type: select
     proxies:
       - 节点选择
-      - 自动选择
-      - 新加坡智选
-      - 香港智选
-      - 台湾智选
-      - 日本智选
-      - 美国智选
-      - 韩国智选
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
       - 手动切换
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/YouTube.png
@@ -155,13 +155,13 @@ proxy-groups:
     type: select
     proxies:
       - 节点选择
-      - 自动选择
-      - 新加坡智选
-      - 香港智选
-      - 台湾智选
-      - 日本智选
-      - 美国智选
-      - 韩国智选
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
       - 手动切换
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TikTok.png
@@ -171,12 +171,12 @@ proxy-groups:
     type: select
     proxies:
       - 节点选择
-      - 美国智选
-      - 香港智选
-      - 台湾智选
-      - 新加坡智选
-      - 日本智选
-      - 韩国智选
+      - US
+      - HK
+      - TW
+      - SG
+      - JP
+      - KR
       - 手动切换
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google_Search.png
@@ -187,15 +187,14 @@ proxy-groups:
     proxies:
       - DIRECT
       - 节点选择
-      - 美国智选
-      - 香港智选
-      - 台湾智选
-      - 新加坡智选
-      - 日本智选
-      - 韩国智选
+      - US
+      - HK
+      - TW
+      - SG
+      - JP
+      - KR
       - 手动切换
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple.png
-
 
 
 # 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
@@ -298,8 +297,8 @@ rules:
   - "RULE-SET,TikTok, TikTok"             # TikTok相关流量走TikTok策略组
   - "RULE-SET,Apple, Apple"               # Apple相关流量走AppStore策略组
   - "RULE-SET,GitHub, 手动切换"            # GitHub规则流量走手动切换策略组
-  - "RULE-SET,SteamCN, 全球直连"           # Steam中国区相关流量走直连策略组
-  - "RULE-SET,ChinaIPs, 全球直连"          # 中国IP流量直连
-  - "RULE-SET,Lan, 全球直连"               # 局域网流量直连
-  - "GEOIP,CN, 全球直连"                   # GeoIP定位中国IP走DIR策略组
-  - "MATCH, 漏网之鱼"                      # 其余流量默认走漏网之鱼策略组，避免漏包
+  - "RULE-SET,SteamCN, Global"           # Steam中国区相关流量走直连策略组
+  - "RULE-SET,ChinaIPs, Global"          # 中国IP流量直连
+  - "RULE-SET,Lan, Global"               # 局域网流量直连
+  - "GEOIP,CN, Global"                   # GeoIP定位中国IP走DIR策略组
+  - "MATCH, Final"                       # 其余流量默认走Final策略组，避免漏包
