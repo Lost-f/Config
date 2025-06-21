@@ -3,7 +3,7 @@
 # 例如，Instagram 类应用可以指定美国、新加坡节点等。
 # icon 支持图片链接或 emoji，非必须，可根据喜好调整。
 proxy-groups:
-  - name: 节点选择                # 主策略组，用户手动选择节点时首选
+  - name: Proxy                  # 主策略组，用户手动选择节点时首选
     type: select                 # 选择类型，用户可手动选择其中一个节点或策略组
     proxies:
       - Auto                     # 调用Auto策略组（智能测速选最快）
@@ -13,11 +13,11 @@ proxy-groups:
       - JP                       # 日本节点集合（url-test策略组）
       - US                       # 美国节点集合（url-test策略组）
       - KR                       # 韩国节点集合（url-test策略组）
-      - 手动切换                  # 另一个手动选择策略组
+      - Select                   # 另一个手动选择策略组
       - DIRECT                   # 直连，不走代理
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple_News.png
 
-  - name: 手动切换                # 手动切换策略组，包含所有节点及策略，方便手动精细调节
+  - name: Select                 # Select策略组，包含所有节点及策略，方便手动精细调节
     include-all: true            # 包含所有代理节点
     type: select                 # 手动选择节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Airport.png
@@ -34,7 +34,7 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
-      - 节点选择
+      - Proxy
       - Auto
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Global.png
 
@@ -42,7 +42,7 @@ proxy-groups:
   - name: Final
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - Auto
       - DIRECT
       - HK
@@ -51,7 +51,7 @@ proxy-groups:
       - JP
       - US
       - KR
-      - 手动切换
+      - Select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
     
 
@@ -109,7 +109,7 @@ proxy-groups:
   - name: Telegram
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - Auto
       - SG
       - HK
@@ -117,14 +117,14 @@ proxy-groups:
       - JP
       - US
       - KR
-      - 手动切换
+      - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Telegram.png
 
   - name: OpenAI
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - Auto
       - SG
       - HK
@@ -132,14 +132,14 @@ proxy-groups:
       - JP
       - US
       - KR
-      - 手动切换
+      - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Siri.png
 
   - name: YouTube
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - Auto
       - SG
       - HK
@@ -147,14 +147,14 @@ proxy-groups:
       - JP
       - US
       - KR
-      - 手动切换
+      - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/YouTube.png
 
   - name: TikTok
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - Auto
       - SG
       - HK
@@ -162,7 +162,7 @@ proxy-groups:
       - JP
       - US
       - KR
-      - 手动切换
+      - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TikTok.png
 
@@ -170,14 +170,14 @@ proxy-groups:
   - name: Google
     type: select
     proxies:
-      - 节点选择
+      - Proxy
       - US
       - HK
       - TW
       - SG
       - JP
       - KR
-      - 手动切换
+      - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google_Search.png
 
@@ -186,14 +186,14 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
-      - 节点选择
+      - Proxy
       - US
       - HK
       - TW
       - SG
       - JP
       - KR
-      - 手动切换
+      - Select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple.png
 
 
@@ -296,9 +296,9 @@ rules:
   - "RULE-SET,YouTube, YouTube"           # YouTube相关流量走YouTube策略组
   - "RULE-SET,TikTok, TikTok"             # TikTok相关流量走TikTok策略组
   - "RULE-SET,Apple, Apple"               # Apple相关流量走AppStore策略组
-  - "RULE-SET,GitHub, 手动切换"            # GitHub规则流量走手动切换策略组
+  - "RULE-SET,GitHub, Select"            # GitHub规则流量走Select策略组
   - "RULE-SET,SteamCN, Global"           # Steam中国区相关流量走直连策略组
   - "RULE-SET,ChinaIPs, Global"          # 中国IP流量直连
   - "RULE-SET,Lan, Global"               # 局域网流量直连
-  - "GEOIP,CN, Global"                   # GeoIP定位中国IP走DIR策略组
+  - "GEOIP,CN, Global"                   # GeoIP定位中国IP走Global策略组
   - "MATCH, Final"                       # 其余流量默认走Final策略组，避免漏包
