@@ -6,28 +6,28 @@ proxy-groups:
   - name: 节点选择                # 主策略组，用户手动选择节点时首选
     type: select                 # 选择类型，用户可手动选择其中一个节点或策略组
     proxies:
-      - 自动选择                 # 调用自动选择策略组（智能测速选最快）
-      - 香港智选                 # 香港节点集合（url-test策略组）
-      - 台湾智选                 # 台湾节点集合（url-test策略组）
-      - 新加坡智选               # 新加坡节点集合（url-test策略组）
-      - 日本智选                 # 日本节点集合（url-test策略组）
-      - 美国智选                 # 美国节点集合（url-test策略组）
-      - 韩国智选                 # 韩国节点集合（url-test策略组）
-      - 手动切换                 # 另一个手动选择策略组
+      - 自动选择                  # 调用自动选择策略组（智能测速选最快）
+      - 香港智选                  # 香港节点集合（url-test策略组）
+      - 台湾智选                  # 台湾节点集合（url-test策略组）
+      - 新加坡智选                # 新加坡节点集合（url-test策略组）
+      - 日本智选                  # 日本节点集合（url-test策略组）
+      - 美国智选                  # 美国节点集合（url-test策略组）
+      - 韩国智选                  # 韩国节点集合（url-test策略组）
+      - 手动切换                  # 另一个手动选择策略组
       - DIRECT                   # 直连，不走代理
-    icon: https://github.com/clash-verge-rev/clash-verge-rev/raw/main/src-tauri/icons/icon.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple_News.png
 
-  - name: 手动切换               # 手动切换策略组，包含所有节点及策略，方便手动精细调节
+  - name: 手动切换                # 手动切换策略组，包含所有节点及策略，方便手动精细调节
     include-all: true            # 包含所有代理节点
     type: select                 # 手动选择节点
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_Update.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Airport.png
 
   - name: 自动选择               # 智能测速自动选择最快节点，节省用户手动选择时间
     type: url-test              # 通过访问指定URL测速延迟来判断节点快慢
     include-all: true           # 测试所有代理节点
     interval: 86400             # 测速间隔，单位秒，86400秒=24小时
     tolerance: 50               # 延迟容忍度，单位毫秒，50ms以内视为可接受
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Auto.png
 
   # 全球直连，优先直连，遇特殊情况走代理
   - name: 全球直连
@@ -36,7 +36,7 @@ proxy-groups:
       - DIRECT
       - 节点选择
       - 自动选择
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Global.png
 
   # 漏网之鱼，未被规则捕获的流量走这里，保证不丢包
   - name: 漏网之鱼
@@ -52,17 +52,17 @@ proxy-groups:
       - 美国智选
       - 韩国智选
       - 手动切换
-    icon: https://img.icons8.com/?size=144&id=9Mz1BhM4ui54&format=png&color=000000
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
     
 
   # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
   - name: 香港智选
     include-all: true
-    filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong  # 节点名匹配规则（正则表达式，不区分大小写）
+    filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong   # 节点名匹配规则（正则表达式，不区分大小写）
     type: url-test                                     # 通过访问特定URL测速延迟
-    interval: 300                                     # 每5分钟测速一次
-    tolerance: 50                                     # 延迟容忍度50ms
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    interval: 300                                      # 每5分钟测速一次
+    tolerance: 50                                      # 延迟容忍度50ms
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Hong_Kong.png
 
   - name: 台湾智选
     include-all: true
@@ -70,7 +70,7 @@ proxy-groups:
     type: url-test
     interval: 300
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TW.png
 
   - name: 日本智选
     include-all: true
@@ -78,7 +78,7 @@ proxy-groups:
     type: url-test
     interval: 300
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Japan.png
 
   - name: 美国智选
     include-all: true
@@ -86,7 +86,7 @@ proxy-groups:
     type: url-test
     interval: 300
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/United_States.png
 
   - name: 新加坡智选
     include-all: true
@@ -94,7 +94,7 @@ proxy-groups:
     type: url-test
     interval: 300
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Singapore.png
 
   - name: 韩国智选
     include-all: true
@@ -102,7 +102,7 @@ proxy-groups:
     type: url-test
     interval: 300
     tolerance: 50
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Korea.png
   
   
   # 以下是针对特定应用或用途的策略组，方便规则调用及分流
@@ -119,7 +119,7 @@ proxy-groups:
       - 韩国智选
       - 手动切换
       - DIRECT
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Telegram.png
 
   - name: OpenAI
     type: select
@@ -134,7 +134,7 @@ proxy-groups:
       - 韩国智选
       - 手动切换
       - DIRECT
-    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Siri.png
 
   - name: YouTube
     type: select
@@ -149,7 +149,7 @@ proxy-groups:
       - 韩国智选
       - 手动切换
       - DIRECT
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/YouTube.png
 
   - name: TikTok
     type: select
@@ -164,7 +164,7 @@ proxy-groups:
       - 韩国智选
       - 手动切换
       - DIRECT
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TikTok.png
 
   # Google相关服务策略组
   - name: Google
@@ -179,7 +179,7 @@ proxy-groups:
       - 韩国智选
       - 手动切换
       - DIRECT
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google_Search.png
 
   # Apple相关服务策略组
   - name: Apple
@@ -194,7 +194,7 @@ proxy-groups:
       - 日本智选
       - 韩国智选
       - 手动切换
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple.png
 
 
 
