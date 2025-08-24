@@ -28,16 +28,7 @@ proxy-groups:
     interval: 600               # 测速间隔，单位秒，86400秒=24小时
     tolerance: 50               # 延迟容忍度，单位毫秒，50ms以内视为可接受
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Auto.png
-
-  # Global，优先直连，遇特殊情况走代理
-  - name: Global
-    type: select
-    proxies:
-      - DIRECT
-      - Proxy
-      - Auto
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Global.png
-
+    
   # Final，未被规则捕获的流量走这里，保证不丢包
   - name: Final
     type: select
@@ -53,7 +44,6 @@ proxy-groups:
       - KR
       - Select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
-    
 
   # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
   - name: HK
@@ -297,8 +287,9 @@ rules:
   - "RULE-SET,TikTok, TikTok"             # TikTok相关流量走TikTok策略组
   - "RULE-SET,Apple, Apple"               # Apple相关流量走AppStore策略组
   - "RULE-SET,GitHub, Select"            # GitHub规则流量走Select策略组
-  - "RULE-SET,SteamCN, Global"           # Steam中国区相关流量走直连策略组
-  - "RULE-SET,ChinaIPs, Global"          # 中国IP流量直连
-  - "RULE-SET,Lan, Global"               # 局域网流量直连
-  - "GEOIP,CN, Global"                   # GeoIP定位中国IP走Global策略组
+  - "RULE-SET,SteamCN, DIRECT"           # Steam中国区相关流量走直连策略组
+  - "RULE-SET,ChinaIPs, DIRECT"          # 中国IP流量直连
+  - "RULE-SET,Lan, DIRECT"               # 局域网流量直连
+  - "GEOIP,CN, DIRECT"                   # GeoIP定位中国IP走直连策略组
   - "MATCH, Final"                       # 其余流量默认走Final策略组，避免漏包
+
