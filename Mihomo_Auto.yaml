@@ -205,7 +205,7 @@ proxy-groups:
 # 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
 rule-providers:
   LocationDKS:
-    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/domain/LocationDKS.txt
+    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/LocationDKS.txt
     path: ./Ruleset/LocationDKS.txt
     behavior: classical
     interval: 86400
@@ -301,7 +301,7 @@ rule-providers:
     type: http
 
   Advertising:
-    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/domain/Advertising.txt
+    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/Advertising.txt
     path: ./Ruleset/Advertising.txt
     behavior: classical
     interval: 86400
@@ -325,9 +325,3 @@ rules:
   - "RULE-SET,Lan,DIRECT"                # 局域网流量直连
   - "GEOIP,CN,DIRECT"                    # GeoIP定位中国IP走直连策略组
   - "MATCH,Final"                        # 其余流量默认走Final策略组，避免漏包
-
-
-
-
-
-
