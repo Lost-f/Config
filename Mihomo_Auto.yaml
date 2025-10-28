@@ -293,7 +293,7 @@ rule-providers:
     type: http
 
   LocationDKS:
-    url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.txt
+    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/domain/LocationDKS.txt
     path: ./Ruleset/LocationDKS.txt
     behavior: classical
     interval: 86400
@@ -318,4 +318,5 @@ rules:
   - "RULE-SET,Lan, DIRECT"               # 局域网流量直连
   - "GEOIP,CN, DIRECT"                   # GeoIP定位中国IP走直连策略组
   - "MATCH, Final"                       # 其余流量默认走Final策略组，避免漏包
+
 
