@@ -96,6 +96,21 @@ proxy-groups:
   
   
   # 以下是针对特定应用或用途的策略组，方便规则调用及分流
+    - name: LocationDKS
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Area.png
+    
   - name: Telegram
     type: select
     proxies:
@@ -277,6 +292,13 @@ rule-providers:
     format: text
     type: http
 
+  LocationDKS:
+    url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.txt
+    path: ./Ruleset/LocationDKS.txt
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
 
 # 规则集，调用上面的rule-providers或自定义规则，指向对应策略组，实现按应用分流
 rules:
@@ -287,9 +309,11 @@ rules:
   - "RULE-SET,TikTok, TikTok"             # TikTok相关流量走TikTok策略组
   - "RULE-SET,Apple, Apple"               # Apple相关流量走AppStore策略组
   - "RULE-SET,GitHub, Select"            # GitHub规则流量走Select策略组
+  - "RULE-SET,LocationDKS, LocationDKS"   # 访问抖快相关流量走LocationDKS策略组
   - "RULE-SET,SteamCN, DIRECT"           # Steam中国区相关流量走直连策略组
   - "RULE-SET,ChinaIPs, DIRECT"          # 中国IP流量直连
   - "RULE-SET,Lan, DIRECT"               # 局域网流量直连
   - "GEOIP,CN, DIRECT"                   # GeoIP定位中国IP走直连策略组
   - "MATCH, Final"                       # 其余流量默认走Final策略组，避免漏包
+
 
