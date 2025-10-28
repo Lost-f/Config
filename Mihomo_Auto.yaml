@@ -302,6 +302,9 @@ rule-providers:
 
 # 规则集，调用上面的rule-providers或自定义规则，指向对应策略组，实现按应用分流
 rules:
+  - "DOMAIN-SUFFIX,dmm.co.jp,JP"
+  - "DOMAIN-SUFFIX,vol.it.inner,DIRECT"
+  - "DOMAIN-SUFFIX,gemini.google.com,OpenAI"
   - "RULE-SET,Google, Google"             # 访问Google相关流量走Google策略组
   - "RULE-SET,Telegram, Telegram"         # Telegram相关流量走Telegram策略组
   - "RULE-SET,OpenAI, OpenAI"             # OpenAI相关流量走OpenAI策略组
@@ -315,5 +318,4 @@ rules:
   - "RULE-SET,Lan, DIRECT"               # 局域网流量直连
   - "GEOIP,CN, DIRECT"                   # GeoIP定位中国IP走直连策略组
   - "MATCH, Final"                       # 其余流量默认走Final策略组，避免漏包
-
 
