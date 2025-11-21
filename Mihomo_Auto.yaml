@@ -292,17 +292,9 @@ rule-providers:
     format: text
     type: http
 
-  China:
-    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/China.txt
-    path: ./Ruleset/China.txt
-    behavior: classical
-    interval: 86400
-    format: text
-    type: http
-
-  Advertising:
-    url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/Advertising.txt
-    path: ./Ruleset/Advertising.txt
+  ChinaIps:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/ChinaIPs/ChinaIPs.list
+    path: ./Ruleset/ChinaIPs.list
     behavior: classical
     interval: 86400
     format: text
@@ -311,7 +303,6 @@ rule-providers:
 
 # 规则集，调用上面的rule-providers或自定义规则，指向对应策略组，实现按应用分流
 rules:
-  - "RULE-SET,Advertising,REJECT"
   - "RULE-SET,Google,Google"             # 访问Google相关流量走Google策略组
   - "RULE-SET,Telegram,Telegram"         # Telegram相关流量走Telegram策略组
   - "RULE-SET,OpenAI,OpenAI"             # OpenAI相关流量走OpenAI策略组
@@ -321,7 +312,8 @@ rules:
   - "RULE-SET,GitHub,Select"             # GitHub规则流量走Select策略组
   - "RULE-SET,LocationDKS,LocationDKS"   # 访问抖快相关流量走LocationDKS策略组
   - "RULE-SET,SteamCN,DIRECT"            # Steam中国区相关流量走直连策略组
-  - "RULE-SET,China,DIRECT"              # 中国IP流量直连
+  - "RULE-SET,ChinaIps,DIRECT"           # 中国IP流量直连
   - "RULE-SET,Lan,DIRECT"                # 局域网流量直连
   - "GEOIP,CN,DIRECT"                    # GeoIP定位中国IP走直连策略组
   - "MATCH,Final"                        # 其余流量默认走Final策略组，避免漏包
+
