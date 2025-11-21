@@ -204,6 +204,30 @@ proxy-groups:
 
 # 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
 rule-providers:
+  UnBan:
+    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/UnBan.list
+    path: ./ruleset/UnBan.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+    
+  BanAD:
+    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/BanAD.list
+    path: ./ruleset/BanAD.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+    
+  BanProgramAD:
+    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/BanProgramAD.list
+    path: ./ruleset/BanProgramAD.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+    
   LocationDKS:
     url: https://raw.githubusercontent.com/666OS/rules/release/mihomo/LocationDKS.txt
     path: ./Ruleset/LocationDKS.txt
@@ -316,4 +340,5 @@ rules:
   - "RULE-SET,Lan,DIRECT"                # 局域网流量直连
   - "GEOIP,CN,DIRECT"                    # GeoIP定位中国IP走直连策略组
   - "MATCH,Final"                        # 其余流量默认走Final策略组，避免漏包
+
 
