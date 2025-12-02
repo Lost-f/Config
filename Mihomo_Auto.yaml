@@ -75,19 +75,21 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
+    - 223.5.5.5
     - 119.29.29.29
     - 180.184.1.1
-    - 223.5.5.5
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fake-ip-filter:
-    - rule-set:DIRECT
-    - rule-set:Private
-    - rule-set:China
+    - "*"
+    - +.lan
+    - +.local
+    - time.*.com
+    - ntp.*.com
+    - +.market.xiaomi.com
     - +.miwifi.com
     - +.docker.io
-    - +.market.xiaomi.com
     - +.push.apple.com
 
 # ==================== 代理策略组 ====================
@@ -432,6 +434,7 @@ rules:
   - "RULE-SET,Lan,DIRECT"                # 局域网流量直连
   - "GEOIP,CN,DIRECT"                    # GeoIP定位中国IP走直连策略组
   - "MATCH,Final"                        # 其余流量默认走Final策略组，避免漏包
+
 
 
 
