@@ -82,7 +82,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fake-ip-filter:
-    - rule-set:Direct
+    - rule-set:DIRECT
     - rule-set:Private
     - rule-set:China
     - +.miwifi.com
@@ -104,7 +104,7 @@ proxy-groups:
       - US                       # 美国节点集合（url-test策略组）
       - KR                       # 韩国节点集合（url-test策略组）
       - Select                   # 另一个手动选择策略组
-      - Direct                   # 直连，不走代理
+      - DIRECT                   # 直连，不走代理
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple_News.png
 
   - name: Select                 # Select策略组，包含所有节点及策略，方便手动精细调节
@@ -132,7 +132,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
 
   # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
@@ -198,7 +198,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Area.png
     
   - name: Telegram
@@ -213,7 +213,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Telegram.png
 
   - name: OpenAI
@@ -228,7 +228,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Siri.png
 
   - name: YouTube
@@ -243,7 +243,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/YouTube.png
 
   - name: TikTok
@@ -258,7 +258,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TikTok.png
 
   # Google相关服务策略组
@@ -274,7 +274,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google_Search.png
 
   # Apple相关服务策略组
@@ -290,7 +290,7 @@ proxy-groups:
       - US
       - KR
       - Select
-      - Direct
+      - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple.png
 
 
@@ -427,11 +427,12 @@ rules:
   - "RULE-SET,Apple,Apple"               # Apple相关流量走AppStore策略组
   - "RULE-SET,GitHub,Select"             # GitHub规则流量走Select策略组
   - "RULE-SET,LocationDKS,LocationDKS"   # 访问抖快相关流量走LocationDKS策略组
-  - "RULE-SET,SteamCN,Direct"            # Steam中国区相关流量走直连策略组
-  - "RULE-SET,ChinaIps,Direct"           # 中国IP流量直连
-  - "RULE-SET,Lan,Direct"                # 局域网流量直连
-  - "GEOIP,CN,Direct"                    # GeoIP定位中国IP走直连策略组
+  - "RULE-SET,SteamCN,DIRECT"            # Steam中国区相关流量走直连策略组
+  - "RULE-SET,ChinaIps,DIRECT"           # 中国IP流量直连
+  - "RULE-SET,Lan,DIRECT"                # 局域网流量直连
+  - "GEOIP,CN,DIRECT"                    # GeoIP定位中国IP走直连策略组
   - "MATCH,Final"                        # 其余流量默认走Final策略组，避免漏包
+
 
 
 
