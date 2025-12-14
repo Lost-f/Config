@@ -323,8 +323,8 @@ RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, 
 rule-providers:
   LocationDKS:
     <<: *RuleProviders
-    path: './rules/LocationDKS.txt'
-    url: 'https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.txt'
+    path: './rules/LocationDKS.yaml'
+    url: 'https://raw.githubusercontent.com/Lost-f/Config/main/LocationDKS.yaml'
 
   LAN:
     <<: *RuleProviders
