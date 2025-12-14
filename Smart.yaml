@@ -316,15 +316,24 @@ UrlTest: &UrlTest {type: url-test, interval: 6, tolerance: 20, lazy: true, url: 
 FallBack: &FallBack {type: fallback, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
 # 锚点 - 负载均衡参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
 LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
+
+rule-anchor:
 # 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
-RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: Auto}
+  RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: Auto}
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: yaml}
+  domaintxt: &domaintxt {type: http, interval: 86400, behavior: domain, format: text}
+  classical: &classical {type: http, interval: 86400, behavior: classical, format: yaml}
+  classicaltxt: &classicaltxt {type: http, interval: 86400, behavior: classical, format: text}
+  mrs: &mrs {type: http, interval: 86400, behavior: domain, format: mrs}
+  mrsip: &mrsip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
 
 # 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
 rule-providers:
   LocationDKS:
-    <<: *RuleProviders
-    path: './rules/LocationDKS.yaml'
-    url: 'https://raw.githubusercontent.com/Lost-f/Config/main/LocationDKS.yaml'
+    <<: *domaintxt
+    path: './rules/LocationDKS.txt'
+    url: 'https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.txt'
 
   LAN:
     <<: *RuleProviders
