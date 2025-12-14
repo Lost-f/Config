@@ -1,0 +1,445 @@
+# ==================== 核心配置 ====================
+# 基础配置
+mode: rule
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+log-level: warning
+bind-address: '*'
+find-process-mode: 'always'
+global-client-fingerprint: chrome
+keep-alive-interval: 15
+keep-alive-idle: 600
+
+# 认证配置
+authentication:
+  - mihomo:yyds999
+skip-auth-prefixes:
+  - 192.168.1.0/24
+  - 192.168.31.0/24
+  - 192.168.100.0/24
+  - 127.0.0.1/8
+
+# 实验性功能
+experimental:
+  quic-go-disable-gso: true  
+     
+# 管理面板配置
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+external-ui-name: zashboard
+external-ui: ui
+external-controller: 127.0.0.1:9090
+secret: yyds999
+
+# 配置存储
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 流量嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+# TUN模式配置
+tun:
+  enable: false
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+    
+# DNS配置
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 180.184.1.1
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  fake-ip-filter:
+    - "*"
+    - +.lan
+    - +.local
+    - time.*.com
+    - ntp.*.com
+    - +.market.xiaomi.com
+    - +.miwifi.com
+    - +.docker.io
+    - +.push.apple.com
+
+# ==================== 代理策略组 ====================
+# 代理策略组配置（proxy-groups）
+proxy-groups:
+  - name: Proxy                  # 主策略组，用户手动选择节点时首选
+    type: select                 # 选择类型，用户可手动选择其中一个节点或策略组
+    proxies:
+      - Auto                     # 调用Auto策略组（智能测速选最快）
+      - HK                       # 香港节点集合（url-test策略组）
+      - TW                       # 台湾节点集合（url-test策略组）
+      - SG                       # 新加坡节点集合（url-test策略组）
+      - JP                       # 日本节点集合（url-test策略组）
+      - US                       # 美国节点集合（url-test策略组）
+      - KR                       # 韩国节点集合（url-test策略组）
+      - Select                   # 另一个手动选择策略组
+      - DIRECT                   # 直连，不走代理
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple_News.png
+
+  - name: Select                 # Select策略组，包含所有节点及策略，方便手动精细调节
+    include-all: true            # 包含所有代理节点
+    type: select                 # 手动选择节点
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Airport.png
+
+  - name: Auto                  # 智能测速Auto最快节点，节省用户手动选择时间
+    type: url-test              # 通过访问指定URL测速延迟来判断节点快慢
+    include-all: true           # 测试所有代理节点
+    interval: 600               # 测速间隔，单位秒，86400秒=24小时
+    tolerance: 50               # 延迟容忍度，单位毫秒，50ms以内视为可接受
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Auto.png
+    
+  # Final，未被规则捕获的流量走这里，保证不丢包
+  - name: Final
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - HK
+      - TW
+      - SG
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
+
+  # 以下是基于节点名称匹配自动测试延迟，筛选出各区域“智选”节点
+  - name: HK
+    include-all: true
+    filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong   # 节点名匹配规则（正则表达式，不区分大小写）
+    type: url-test                                     # 通过访问特定URL测速延迟
+    interval: 300                                      # 每5分钟测速一次
+    tolerance: 50                                      # 延迟容忍度50ms
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Hong_Kong.png
+
+  - name: TW
+    include-all: true
+    filter: (?i)台|新北|彰化|TW|Taiwan
+    type: url-test
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TW.png
+
+  - name: JP
+    include-all: true
+    filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
+    type: url-test
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Japan.png
+
+  - name: US
+    include-all: true
+    filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
+    type: url-test
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/United_States.png
+
+  - name: SG
+    include-all: true
+    filter: (?i)新加坡|坡|狮城|SG|Singapore
+    type: url-test
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Singapore.png
+
+  - name: KR
+    include-all: true
+    filter: (?i)KR|Korea|KOR|首尔|韩|韓
+    type: url-test
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Korea.png
+  
+  
+  # 以下是针对特定应用或用途的策略组，方便规则调用及分流
+  - name: LocationDKS
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Area.png
+    
+  - name: Telegram
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Telegram.png
+
+  - name: AI
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Siri.png
+
+  - name: YouTube
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/YouTube.png
+
+  - name: TikTok
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TikTok.png
+
+  # Google相关服务策略组
+  - name: Google
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google_Search.png
+
+  # Apple相关服务策略组
+  - name: Apple
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - SG
+      - HK
+      - TW
+      - JP
+      - US
+      - KR
+      - Select
+      - DIRECT
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple.png
+
+# 策略组参数锚点
+# 锚点 - 时延优选参数 [每 6 秒一次惰性健康检查，容差 20ms，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+UrlTest: &UrlTest {type: url-test, interval: 6, tolerance: 20, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
+# 锚点 - 故障转移参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+FallBack: &FallBack {type: fallback, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
+# 锚点 - 负载均衡参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
+# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
+RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: Auto}
+
+# 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
+rule-providers:
+  LocationDKS:
+    <<: *RuleProviders
+    path: './rules/LocationDKS.txt'
+    url: https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.mrs
+
+  LAN:
+    <<: *RuleProviders
+    path: './rules/Lan.yaml'
+    url: 'https://rule.kelee.one/Clash/LAN_SPLITTER.yaml'
+
+  Direct:
+    <<: *RuleProviders
+    path: './rules/Direct.yaml'
+    url: 'https://rule.kelee.one/Clash/Direct.yaml'
+
+  Proxy:
+    <<: *RuleProviders
+    path: './rules/Proxy.yaml'
+    url: 'https://rule.kelee.one/Clash/Proxy.yaml'
+
+  ChinaDownloadCDN:
+    <<: *RuleProviders
+    path: './rules/ChinaDownloadCDN.yaml'
+    url: 'https://rule.kelee.one/Clash/ChinaDownloadCDN.yaml'
+
+  InternationalDownloadCDN:
+    <<: *RuleProviders
+    path: './rules/InternationalDownloadCDN.yaml'
+    url: 'https://rule.kelee.one/Clash/InternationalDownloadCDN.yaml'
+
+  AI:
+    <<: *RuleProviders
+    path: './rules/AI.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'
+
+  TikTok:
+    <<: *RuleProviders
+    path: './rules/TikTok.yaml'
+    url: 'https://rule.kelee.one/Clash/TikTok.yaml'
+
+  SpeedtestIntl:
+    <<: *RuleProviders
+    path: './rules/SpeedtestInternational.yaml'
+    url: 'https://rule.kelee.one/Clash/SpeedtestInternational.yaml'
+
+  Steam:
+    <<: *RuleProviders
+    path: './rules/Steam.yaml'
+    url: 'https://rule.kelee.one/Clash/Steam.yaml'
+
+  Microsoft:
+    <<: *RuleProviders
+    path: './rules/Microsoft.yaml'
+    url: 'https://rule.kelee.one/Clash/Microsoft.yaml'
+
+  Google:
+    <<: *RuleProviders
+    path: './rules/Google.yaml'
+    url: 'https://rule.kelee.one/Clash/Google.yaml'
+
+  YouTube:
+    <<: *RuleProviders
+    path: './rules/YouTube.yaml'
+    url: 'https://rule.kelee.one/Clash/YouTube.yaml'
+
+  GitHub:
+    <<: *RuleProviders
+    path: './rules/GitHub.yaml'
+    url: https://rule.kelee.one/Clash/GitHub.yaml
+
+  Telegram:
+    <<: *RuleProviders
+    path: './rules/Telegram.yaml'
+    url: 'https://rule.kelee.one/Clash/Telegram.yaml'
+
+  ESET_China:
+    <<: *RuleProviders
+    path: './rules/ESET_China.yaml'
+    url: 'https://rule.kelee.one/Clash/ESET_China.yaml'
+
+  iCloudChina:
+    <<: *RuleProviders
+    path: './rules/iCloudChina.yaml'
+    url: 'https://rule.kelee.one/Clash/iCloudChina.yaml'
+
+  ApplePushNotificationService:
+    <<: *RuleProviders
+    path: './rules/ApplePushNotificationService.yaml'
+    url: 'https://rule.kelee.one/Clash/ApplePushNotificationService.yaml'
+
+  AppleSoftwareUpdates:
+    <<: *RuleProviders
+    path: './rules/AppleSoftwareUpdates.yaml'
+    url: 'https://rule.kelee.one/Clash/AppleSoftwareUpdates.yaml'
+
+  AppleID:
+    <<: *RuleProviders
+    path: './rules/AppleID.yaml'
+    url: 'https://rule.kelee.one/Clash/AppleAccount.yaml'
+
+  AppStore:
+    <<: *RuleProviders
+    path: './rules/AppStore.yaml'
+    url: 'https://rule.kelee.one/Clash/AppStore.yaml'
+
+  TestFlight:
+    <<: *RuleProviders
+    path: './rules/TestFlight.yaml'
+    url: 'https://rule.kelee.one/Clash/TestFlight.yaml'
+
+# 规则集，调用上面的rule-providers或自定义规则，指向对应策略组，实现按应用分流
+rules:
+  - RULE-SET, LAN, DIRECT
+  - RULE-SET, LocationDKS, LocationDKS
+  - RULE-SET, Direct, DIRECT
+  - RULE-SET, Proxy, Final
+  - RULE-SET, ChinaDownloadCDN, DIRECT
+  - RULE-SET, InternationalDownloadCDN, Select
+  - RULE-SET, AI, AI
+  - RULE-SET, TikTok, TikTok
+  - RULE-SET, SpeedtestIntl, Select
+  - RULE-SET, Steam, Final
+  - RULE-SET, Microsoft, Select
+  - RULE-SET, Google, Google
+  - RULE-SET, YouTube, YouTube
+  - RULE-SET, GitHub, Select
+  - RULE-SET, Telegram, Telegram
+  - RULE-SET, ESET_China, DIRECT
+  - RULE-SET, iCloudChina, DIRECT
+  - RULE-SET, ApplePushNotificationService, DIRECT
+  - RULE-SET, AppleSoftwareUpdates, DIRECT
+  - RULE-SET, AppleID, Apple
+  - RULE-SET, AppStore, Apple
+  - RULE-SET, TestFlight, Apple
+  - GEOIP, CN, DIRECT
+  - MATCH, Final
