@@ -105,6 +105,7 @@ proxy-groups:
       - JP                       # 日本节点集合（url-test策略组）
       - US                       # 美国节点集合（url-test策略组）
       - KR                       # 韩国节点集合（url-test策略组）
+      - EU                       # 欧洲节点集合（url-test策略组）
       - Select                   # 另一个手动选择策略组
       - DIRECT                   # 直连，不走代理
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple_News.png
@@ -133,6 +134,7 @@ proxy-groups:
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
@@ -186,6 +188,12 @@ proxy-groups:
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Korea.png
   
+    - name: EU
+    include-all: true
+    filter:  ^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU)).*$
+    type: url-test
+    interval: 300
+    tolerance: 50
   
   # 以下是针对特定应用或用途的策略组，方便规则调用及分流
   - name: LocationDKS
@@ -193,12 +201,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Area.png
@@ -208,12 +217,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Telegram.png
@@ -223,12 +233,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Siri.png
@@ -238,12 +249,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/YouTube.png
@@ -253,12 +265,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/TikTok.png
@@ -269,12 +282,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google_Search.png
@@ -285,12 +299,13 @@ proxy-groups:
     proxies:
       - Proxy
       - Auto
-      - SG
       - HK
       - TW
+      - SG
       - JP
       - US
       - KR
+      - EU
       - Select
       - DIRECT
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Apple.png
@@ -302,7 +317,7 @@ UrlTest: &UrlTest {type: url-test, interval: 6, tolerance: 20, lazy: true, url: 
 FallBack: &FallBack {type: fallback, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
 # 锚点 - 负载均衡参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
 LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用自动策略]
+# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
 RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: Auto}
 
 # 远程规则配置，自动更新规则文件（例如广告屏蔽、特殊应用分流等）
@@ -310,7 +325,7 @@ rule-providers:
   LocationDKS:
     <<: *RuleProviders
     path: './rules/LocationDKS.txt'
-    url: https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.mrs
+    url: 'https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.mrs'
 
   LAN:
     <<: *RuleProviders
@@ -375,7 +390,7 @@ rule-providers:
   GitHub:
     <<: *RuleProviders
     path: './rules/GitHub.yaml'
-    url: https://rule.kelee.one/Clash/GitHub.yaml
+    url: 'https://rule.kelee.one/Clash/GitHub.yaml'
 
   Telegram:
     <<: *RuleProviders
@@ -435,9 +450,9 @@ rules:
   - RULE-SET, GitHub, Select
   - RULE-SET, Telegram, Telegram
   - RULE-SET, ESET_China, DIRECT
-  - RULE-SET, iCloudChina, DIRECT
-  - RULE-SET, ApplePushNotificationService, DIRECT
-  - RULE-SET, AppleSoftwareUpdates, DIRECT
+  - RULE-SET, iCloudChina, Apple
+  - RULE-SET, ApplePushNotificationService, Apple
+  - RULE-SET, AppleSoftwareUpdates, Apple
   - RULE-SET, AppleID, Apple
   - RULE-SET, AppStore, Apple
   - RULE-SET, TestFlight, Apple
