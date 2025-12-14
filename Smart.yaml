@@ -324,12 +324,12 @@ rule-providers:
   LocationDKS:
     <<: *RuleProviders
     path: './rules/LocationDKS.txt'
-    url: 'https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.mrs'
+    url: 'https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.txt'
 
   LAN:
     <<: *RuleProviders
     path: './rules/Lan.yaml'
-    url: 'https://rule.kelee.one/Clash/LAN_SPLITTER.yaml'
+    url: 'https://rule.kelee.one/Clash/Lan.yaml'
 
   Direct:
     <<: *RuleProviders
@@ -341,16 +341,6 @@ rule-providers:
     path: './rules/Proxy.yaml'
     url: 'https://rule.kelee.one/Clash/Proxy.yaml'
 
-  ChinaDownloadCDN:
-    <<: *RuleProviders
-    path: './rules/ChinaDownloadCDN.yaml'
-    url: 'https://rule.kelee.one/Clash/ChinaDownloadCDN.yaml'
-
-  InternationalDownloadCDN:
-    <<: *RuleProviders
-    path: './rules/InternationalDownloadCDN.yaml'
-    url: 'https://rule.kelee.one/Clash/InternationalDownloadCDN.yaml'
-
   AI:
     <<: *RuleProviders
     path: './rules/AI.yaml'
@@ -361,10 +351,10 @@ rule-providers:
     path: './rules/TikTok.yaml'
     url: 'https://rule.kelee.one/Clash/TikTok.yaml'
 
-  SpeedtestIntl:
+  Speedtest:
     <<: *RuleProviders
-    path: './rules/SpeedtestInternational.yaml'
-    url: 'https://rule.kelee.one/Clash/SpeedtestInternational.yaml'
+    path: './rules/Speedtest.yaml'
+    url: 'https://rule.kelee.one/Clash/Speedtest.yaml'
 
   Steam:
     <<: *RuleProviders
@@ -396,30 +386,30 @@ rule-providers:
     path: './rules/Telegram.yaml'
     url: 'https://rule.kelee.one/Clash/Telegram.yaml'
 
-  ESET_China:
+  China:
     <<: *RuleProviders
-    path: './rules/ESET_China.yaml'
-    url: 'https://rule.kelee.one/Clash/ESET_China.yaml'
+    path: './rules/China.yaml'
+    url: 'https://rule.kelee.one/Clash/China.yaml'
 
-  iCloudChina:
+  ChinaIPs:
     <<: *RuleProviders
-    path: './rules/iCloudChina.yaml'
-    url: 'https://rule.kelee.one/Clash/iCloudChina.yaml'
+    path: './rules/ChinaIPs.yaml'
+    url: 'https://rule.kelee.one/Clash/ChinaIPs.yaml'
 
-  ApplePushNotificationService:
+  iCloud:
     <<: *RuleProviders
-    path: './rules/ApplePushNotificationService.yaml'
-    url: 'https://rule.kelee.one/Clash/ApplePushNotificationService.yaml'
+    path: './rules/iCloud.yaml'
+    url: 'https://rule.kelee.one/Clash/iCloud.yaml'
 
-  AppleSoftwareUpdates:
+  Apple:
     <<: *RuleProviders
-    path: './rules/AppleSoftwareUpdates.yaml'
-    url: 'https://rule.kelee.one/Clash/AppleSoftwareUpdates.yaml'
+    path: './rules/Apple.yaml'
+    url: 'https://rule.kelee.one/Clash/Apple.yaml'
 
   AppleID:
     <<: *RuleProviders
     path: './rules/AppleID.yaml'
-    url: 'https://rule.kelee.one/Clash/AppleAccount.yaml'
+    url: 'https://rule.kelee.one/Clash/AppleID.yaml'
 
   AppStore:
     <<: *RuleProviders
@@ -437,21 +427,19 @@ rules:
   - RULE-SET, LAN, DIRECT
   - RULE-SET, Direct, DIRECT
   - RULE-SET, Proxy, Final
-  - RULE-SET, ChinaDownloadCDN, DIRECT
-  - RULE-SET, InternationalDownloadCDN, Select
   - RULE-SET, AI, AI
   - RULE-SET, TikTok, TikTok
-  - RULE-SET, SpeedtestIntl, Select
+  - RULE-SET, Speedtest, Select
   - RULE-SET, Steam, Final
   - RULE-SET, Microsoft, Select
   - RULE-SET, Google, Google
   - RULE-SET, YouTube, YouTube
   - RULE-SET, GitHub, Select
   - RULE-SET, Telegram, Telegram
-  - RULE-SET, ESET_China, DIRECT
-  - RULE-SET, iCloudChina, Apple
-  - RULE-SET, ApplePushNotificationService, Apple
-  - RULE-SET, AppleSoftwareUpdates, Apple
+  - RULE-SET, China, DIRECT
+  - RULE-SET, ChinaIPs, DIRECT
+  - RULE-SET, iCloud, Apple
+  - RULE-SET, Apple, Apple
   - RULE-SET, AppleID, Apple
   - RULE-SET, AppStore, Apple
   - RULE-SET, TestFlight, Apple
