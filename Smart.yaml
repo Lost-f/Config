@@ -369,7 +369,7 @@ rules:
   - RULE-SET, AppleCN, DIRECT
   - RULE-SET, AI, AI
   - RULE-SET, Speedtest, Select
-  - RULE-SET, Telegram, Social
+  - RULE-SET, Telegram, Telegram
   - RULE-SET, SocialMedia, Social
   - RULE-SET, Streaming, Streaming
   - RULE-SET, Apple, Apple
@@ -383,7 +383,7 @@ rules:
   - RULE-SET, AdvertisingIP, REJECT, no-resolve
   - RULE-SET, PrivateIP, DIRECT, no-resolve
   - RULE-SET, AIIP, AI, no-resolve
-  - RULE-SET, TelegramIP, Social, no-resolve
+  - RULE-SET, TelegramIP, Telegram, no-resolve
   - RULE-SET, SocialMediaIP, Social, no-resolve
   - RULE-SET, StreamingIP, Streaming, no-resolve
   - RULE-SET, GoogleIP, Google, no-resolve
