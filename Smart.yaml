@@ -360,10 +360,9 @@ rules:
   # 拦截规则
   - RULE-SET, Tracking, REJECT
   - RULE-SET, Advertising, REJECT
-#  - AND, ((DST-PORT,443), (NETWORK,UDP)), REJECT  # 阻止 QUIC
 
     # 域名规则
-  - DOMAIN-KEYWORD, speedtest, Select
+  - RULE-SET, LocationDKS, LocationDKS
   - RULE-SET, Private, DIRECT
   - RULE-SET, Direct, DIRECT
   - RULE-SET, AppleCN, DIRECT
@@ -394,3 +393,5 @@ rules:
   # 兜底规则
   - GEOIP, CN, DIRECT
   - MATCH, Final
+  
+#  - AND, ((DST-PORT,443), (NETWORK,UDP)), REJECT  # 阻止 QUIC
