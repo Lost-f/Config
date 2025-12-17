@@ -360,7 +360,7 @@ rules:
   # 拦截规则
   - RULE-SET, Tracking, REJECT
   - RULE-SET, Advertising, REJECT
-  - AND, ((DST-PORT,443), (NETWORK,UDP)), REJECT  # 阻止 QUIC
+#  - AND, ((DST-PORT,443), (NETWORK,UDP)), REJECT  # 阻止 QUIC
 
     # 域名规则
   - DOMAIN-KEYWORD, speedtest, Select
