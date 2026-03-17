@@ -1,4 +1,3 @@
-
 // 配置会在启用 Smart 内核时自动应用
 
 function main(config) {
