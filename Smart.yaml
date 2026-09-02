@@ -167,7 +167,7 @@ proxy-groups:
   - name: JP
     include-all: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
-    type: load-balance
+    type: url-test
     interval: 300
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Japan.png
@@ -175,7 +175,7 @@ proxy-groups:
   - name: US
     include-all: true
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
-    type: load-balance
+    type: url-test
     interval: 300
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/United_States.png
@@ -183,7 +183,7 @@ proxy-groups:
   - name: KR
     include-all: true
     filter: (?i)KR|Korea|KOR|首尔|韩|韓
-    type: load-balance
+    type: url-test
     interval: 300
     tolerance: 50
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Korea.png
