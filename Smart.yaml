@@ -21,14 +21,13 @@ keep-alive-idle: 600
 authentication:
   - mihomo:yyds999
 skip-auth-prefixes:
-  - 192.168.1.0/24
-  - 192.168.31.0/24
-  - 192.168.100.0/24
-  - 127.0.0.1/8
-
+  - 192.168.0.0/16
+  - 127.0.0.0/8
+  - 10.0.0.0/8
+  - 172.16.0.0/12
 # 实验性功能
 experimental:
-  quic-go-disable-gso: true  
+  quic-go-disable-gso: true
      
 # 管理面板配置
 external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
